@@ -1,94 +1,330 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>emptyacies</title>
-<style>
-    body {
-        background-color: #333;
-        color: white;
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    .container {
-        text-align: center;
-    }
-    button {
-        margin: 20px;
-        padding: 10px 20px;
-        font-size: 16px;
-        color: white;
-        background-color: #555;
-        border: none;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #777;
-    }
-</style>
-</head>
-<body>
-<div class="container">
-    <h1>What did you wanna see here?</h1>
-    <button onclick="redirect('https://youtu.be/dQw4w9WgXcQ')">nothing</button>
-    <button onclick="redirect('https://www.google.com')">something</button>
-</div>
-<script>
-function redirect(link) {
-    window.location.href = link;
-}
-
-const API_BASE = "https://discord.com/api/v10";
-const CDN_BASE = "https://cdn.discordapp.com";
-const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN;
-
-async function sendRequest(route) {
-    const response = await fetch(`${API_BASE}${route}`, {
-        headers: {
-            "Authorization": `Bot ${DISCORD_TOKEN}`,
-            "Accept": "application/json"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <style>
+        html,
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
         }
-    });
 
-    if (!response.ok) {
-        throw new Error(`Failed to GET ${route}: ${response.status} ${response.statusText}\n` + await response.text().catch(() => ""));
-    }
+        canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
 
-    return response.json();
-}
+        .container {
+            z-index: 999;
+        }
 
-async function getUser(id) {
-    return sendRequest(`/users/${id}`);
-}
+        .card {
+            font-weight: bold;
+            position: relative;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #333;
+            border-radius: .75em;
+            background: rgb(255 255 255 / 5%);
+            backdrop-filter: blur(5px);
+            box-shadow: 12px 12px 10px 0 rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
 
-function getExt(asset) {
-    return asset.startsWith("a_") ? "gif" : "webp";
-}
+        .contact-info {
+            background: rgba(39, 39, 39, 0.8);
+            padding: 10px;
+            border-radius: .75em;
+        }
 
-function getUserAvatar(user, format = "webp") {
-    if (!user.avatar) {
-        const n = user.discriminator % 5;
-        return `${CDN_BASE}/embed/avatars/${n}.png`;
-    }
-    return `${CDN_BASE}/avatars/${user.id}/${user.avatar}.${format ?? getExt(user.avatar)}?size=256`;
-}
+        .contact-info p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            align-items: center;
+        }
 
-function getUserBanner(user) {
-    if (!user.banner) return null;
-    return `${CDN_BASE}/banners/${user.id}/${user.banner}.${getExt(user.banner)}?size=512`;
-}
+        a,
+        .icon {
+            color: #FFFFFF;
+            text-decoration: none;
+            margin-right: 8px;
+            transition: color 0.3s;
+        }
 
-// Пример использования
-getUser('1199020680503632043').then(userInfo => {
-    console.log(userInfo);
-    // Здесь вы можете использовать userInfo для создания виджета профиля пользователя
-});
+        .icon {
+            filter: invert(1);
+            width: 24px;
 
-</script>
+        }
+
+        a:hover {
+            text-decoration: none;
+            color: #ff0000;
+        }
+
+        .bottom-container {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .links,
+        .icons {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .widget {
+            width: 340px;
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        .widget-header {
+            background: url('https://cdn.discordapp.com/banners/852841562651492372/c3257096dfbb4cd981ca9cdbae460f40.webp?size=512') no-repeat;
+            background-size: cover;
+            padding: 15px;
+            height: 90px;
+        }
+
+        .widget-content {
+            background: linear-gradient(180deg, black, #0c0000);
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .avatar {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .badges {
+            display: flex;
+            background-color: #1f1f1f;
+            border-radius: 0.75em;
+            justify-content: space-evenly;
+        }
+
+        .badge {
+            height: 22px;
+            width: 22px;
+            display: inline-block;
+        }
+
+        .name {
+            text-align: left;
+            font-size: 23px;
+        }
+
+        .avatar-container {
+            display: contents;
+        }
+
+        .decor {
+            position: absolute;
+            z-index: 2;
+            left: 35px;
+        }
+
+        .avatars {
+            position: relative;
+            z-index: 1;
+        }
+
+        #tooltip-toggle {
+            display: flex;
+        }
+
+        #tooltip-toggle:hover>.tooltip-text {
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tooltip-text {
+            position: absolute;
+            background-color: #1f1f1f;
+            font-size: 13px;
+            font-weight: 400;
+            padding: 10px;
+            border-radius: 7px;
+            width: 120px;
+            transform: translate(-59px, -60px);
+            display: block;
+            opacity: 0;
+            z-index: 999;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tooltip-text:after {
+            content: "";
+            position: absolute;
+            left: 60px;
+            top: 50px;
+            border: 10px solid;
+            border-color: #1f1f1f transparent transparent transparent;
+        }
+
+        .icons,
+        .text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            color: #FFFFFF;
+        }
+
+        .left-container {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="contact-info">
+                <div class="widget">
+                    <div class="widget-header">
+                    </div>
+                    <div class="widget-content">
+                        <div class="avatar-container">
+                            <img src="https://cdn.discordapp.com/avatar-decoration-presets/a_3c97a2d37f433a7913a1c7b7a735d000.png?size=160&passthrough=true"
+                                class="decor" width="60" height="60">
+
+                            <img src="https://cdn.discordapp.com/avatars/852841562651492372/e557da8ca3afb6650193c7807121c9bb.webp?size=256"
+                                class="avatar" width="50" height="50">
+                        </div>
+
+                        <div>
+                            <div class="name">emptyacies</div>
+                            <div class="badges">
+                                <img class="badge"
+                                    src="https://cdn.discordapp.com/badge-icons/011940fd013da3f7fb926e4a1cd2e618.png">
+                                <img class="badge"
+                                    src="https://cdn.discordapp.com/badge-icons/6bdc42827a38498929a4920da12695d9.png">
+                                <img class="badge"
+                                    src="https://cdn.discordapp.com/badge-icons/2ba85e8026a8614b640c2837bcdfe21b.png">
+                                <img class="badge"
+                                    src="https://cdn.discordapp.com/badge-icons/72bed924410c304dbe3d00a6e593ff59.png">
+                                <span id="tooltip-toggle">
+                                    <img class="badge"
+                                        src="https://cdn.discordapp.com/badge-icons/6de6d34650760ba5551a79732e98ed60.png">
+                                    <span class="tooltip-text">Originally known as emptyacies#0666</span>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-container">
+                    <div class="left-container">
+                        <div class="icons">
+                            <img src="https://www.svgrepo.com/show/501411/twitter-boxed.svg" alt="Twitter" class="icon">
+                            <img src="https://www.svgrepo.com/show/378411/discord-fill.svg" alt="Discord" class="icon">
+                            <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub" class="icon">
+                            <img src="https://www.svgrepo.com/show/473800/steam.svg" alt="Steam" class="icon">
+
+
+                        </div>
+                        <div class="text">
+                            <p>Twitter:</p>
+                            <p>Discord:</p>
+                            <p>GitHub:</p>
+                            <p>Steam:</p>
+                        </div>
+                    </div>
+
+                    <div class="links">
+                        <p><a href="https://twitter.com/emptyacies">@emptyacies</a></p>
+                        <p><a href="https://discord.com/users/852841562651492372">emptyacies</a></p>
+                        <p><a href="https://github.com/emptyacies">emptyacies</a></p>
+                        <p><a href="https://steamcommunity.com/id/emptyacies/">emptyacies</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+            }
+            update() {
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.x = Math.random() * canvas.width;
+                }
+                if (this.y < 0 || this.y > canvas.height) {
+                    this.y = Math.random() * canvas.height;
+                }
+                this.x += this.speedX;
+                this.y += this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < 100; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+    </script>
 </body>
+
 </html>
