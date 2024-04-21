@@ -42,6 +42,53 @@
 function redirect(link) {
     window.location.href = link;
 }
+
+const API_BASE = "https://discord.com/api/v10";
+const CDN_BASE = "https://cdn.discordapp.com";
+const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN;
+
+async function sendRequest(route) {
+    const response = await fetch(`${API_BASE}${route}`, {
+        headers: {
+            "Authorization": `Bot ${DISCORD_TOKEN}`,
+            "Accept": "application/json"
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to GET ${route}: ${response.status} ${response.statusText}\n` + await response.text().catch(() => ""));
+    }
+
+    return response.json();
+}
+
+async function getUser(id) {
+    return sendRequest(`/users/${id}`);
+}
+
+function getExt(asset) {
+    return asset.startsWith("a_") ? "gif" : "webp";
+}
+
+function getUserAvatar(user, format = "webp") {
+    if (!user.avatar) {
+        const n = user.discriminator % 5;
+        return `${CDN_BASE}/embed/avatars/${n}.png`;
+    }
+    return `${CDN_BASE}/avatars/${user.id}/${user.avatar}.${format ?? getExt(user.avatar)}?size=256`;
+}
+
+function getUserBanner(user) {
+    if (!user.banner) return null;
+    return `${CDN_BASE}/banners/${user.id}/${user.banner}.${getExt(user.banner)}?size=512`;
+}
+
+// Пример использования
+getUser('1199020680503632043').then(userInfo => {
+    console.log(userInfo);
+    // Здесь вы можете использовать userInfo для создания виджета профиля пользователя
+});
+
 </script>
 </body>
 </html>
