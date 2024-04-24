@@ -1,4 +1,4 @@
-<!-- WARNING all this trash below was written by dumb retarded autistic shithead, so read carefully or your eyeballs might pop out-->
+<!-- WARNING all this trash below was written by dumb retarded autistic shithead, so be careful or your eyeballs might pop out while reading it -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,12 +39,32 @@
             position: relative;
             padding: 20px;
             text-align: center;
-            border: 1px solid #333;
+            border: 1px solid #ffffff40;
+            border-right: 1px solid #ffffff20;
+            border-bottom: 1px solid #ffffff20;
             border-radius: .75em;
-            background: rgb(255 255 255 / 5%);
             backdrop-filter: blur(5px);
-            box-shadow: 12px 12px 10px 0 rgba(0, 0, 0, 0.5);
+            background: rgb(255 255 255 / 5%);
+            box-shadow: 0px 5px 45px 0 rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100%;
+            filter: blur(5px);
+            background: rgb(255, 255, 255, .5);
+            transform: skewX(30deg) translateX(-220px);
+            transition: 0.2s;
             z-index: 999;
+        }
+
+        .card:hover:before {
+            transform: skewX(30deg) translateX(540px);
         }
 
         .contact-info {
@@ -176,6 +196,8 @@
             display: block;
             visibility: hidden;
             position: absolute;
+            opacity: 0;
+            z-index: 999;
             background-color: #1f1f1f;
             font-size: 13px;
             font-weight: 400;
@@ -183,8 +205,6 @@
             border-radius: 7px;
             width: 120px;
             transform: translate(-59px, -60px);
-            opacity: 0;
-            z-index: 999;
             transition: all 0.2s ease-in-out;
         }
 
