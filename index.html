@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
+            user-select: none;
         }
 
         canvas {
@@ -171,16 +172,9 @@
             z-index: 1;
         }
 
-        #tooltip-toggle {
-            display: flex;
-        }
-
-        #tooltip-toggle:hover>.tooltip-text {
-            opacity: 1;
-            transition: all 0.2s ease-in-out;
-        }
-
         .tooltip-text {
+            display: block;
+            visibility: hidden;
             position: absolute;
             background-color: #1f1f1f;
             font-size: 13px;
@@ -189,7 +183,6 @@
             border-radius: 7px;
             width: 120px;
             transform: translate(-59px, -60px);
-            display: block;
             opacity: 0;
             z-index: 999;
             transition: all 0.2s ease-in-out;
@@ -202,6 +195,12 @@
             top: 50px;
             border: 10px solid;
             border-color: #1f1f1f transparent transparent transparent;
+        }
+
+        .tooltip-toggle:hover>.tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            transition: all 0.2s ease-in-out;
         }
 
         .icons,
@@ -243,10 +242,9 @@
                                 <div class="badge b2"></div>
                                 <div class="badge b3"></div>
                                 <div class="badge b4"></div>
-                                <span id="tooltip-toggle">
-                                    <div class="badge b5"></div>
+                                <div class="badge b5 tooltip-toggle">
                                     <span class="tooltip-text">Originally known as emptyacies#0666</span>
-                                </span>
+                                </div>
                             </div>
 
                         </div>
