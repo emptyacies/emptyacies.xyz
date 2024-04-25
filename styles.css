@@ -193,9 +193,32 @@ a:hover {
   align-items: center;
 }
 
+.avatar-box {
+  display: contents;
+}
+
+.decor {
+  position: absolute;
+  z-index: 2;
+  left: 35px;
+}
+
 .avatar {
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.name-box {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 200px;
+  height: 50px;
+}
+
+.name {
+  text-align: left;
+  font-size: 22px;
 }
 
 .badges {
@@ -240,36 +263,6 @@ a:hover {
 .b6 {
   background: url("https://cdn.discordapp.com/badge-icons/7d9ae358c8c5e118768335dbe68b4fb8.png")
     no-repeat;
-}
-
-.name-box {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  width: 200px;
-  height: 50px;
-}
-
-.name {
-  text-align: left;
-  font-size: 22px;
-}
-
-.avatar-box {
-  display: contents !important;
-  color: #fff;
-  gap:8px;
-}
-
-.decor {
-  position: absolute;
-  z-index: 2;
-  left: 35px;
-}
-
-.avatars {
-  position: relative;
-  z-index: 1;
 }
 
 .tooltip {
