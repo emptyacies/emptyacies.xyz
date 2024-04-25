@@ -257,6 +257,8 @@ a:hover {
 
 .avatar-box {
   display: contents !important;
+  color: #fff;
+  gap:8px;
 }
 
 .decor {
