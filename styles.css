@@ -202,7 +202,9 @@ a:hover {
   display: flex;
   background-color: #1f1f1f;
   border-radius: 0.75em;
-  justify-content: space-evenly;
+  width: fit-content;
+  gap: 2px;
+  padding: 0px 4px;
 }
 
 .badge {
@@ -240,12 +242,20 @@ a:hover {
     no-repeat;
 }
 
-.name {
-  text-align: left;
-  font-size: 23px;
+.name-box {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 200px;
+  height: 50px;
 }
 
-.avatar-container {
+.name {
+  text-align: left;
+  font-size: 22px;
+}
+
+.avatar-box {
   display: contents;
 }
 
