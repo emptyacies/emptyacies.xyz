@@ -256,7 +256,7 @@ a:hover {
 }
 
 .avatar-box {
-  display: contents;
+  display: contents !important;
 }
 
 .decor {
