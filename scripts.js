@@ -1,3 +1,5 @@
+window.location.replace("http://stackoverflow.com");
+
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 const position = document.documentElement;
