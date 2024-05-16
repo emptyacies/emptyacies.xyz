@@ -11,3 +11,4 @@ document.querySelectorAll('.randomize').forEach(function (element) {
     element.style.setProperty('--i', randomValue);
 });
     
+window.location.replace("http://stackoverflow.com");
