@@ -276,7 +276,7 @@ a:hover {
   font-weight: 400;
   padding: 10px;
   border-radius: 7px;
-  width: 140px;
+  max-width: 150px;
   transform: translate(-59px, -60px);
   transition: all 0.2s ease-in-out;
 }
@@ -294,6 +294,13 @@ a:hover {
   visibility: visible;
   opacity: 1;
   transition: all 0.2s ease-in-out;
+}
+
+.sttf {
+  transform: translate(-59px, -45px);
+}
+.sttf {
+  top: 35px;
 }
 
 .icons,
