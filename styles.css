@@ -299,7 +299,7 @@ a:hover {
 .sttf {
   transform: translate(-59px, -45px);
 }
-.sttf {
+.sttf::after {
   top: 35px;
 }
 
