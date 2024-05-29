@@ -186,7 +186,7 @@ a:hover {
 }
 
 .widget-content {
-  background: linear-gradient(180deg, black, #0c0000);
+  background: linear-gradient(180deg, #0b0806, #0c0000);
   color: white;
   padding: 10px;
   display: flex;
@@ -223,8 +223,8 @@ a:hover {
 
 .badges {
   display: flex;
-  background-color: #1f1f1f;
-  border-radius: 0.75em;
+  background-color: #040302;
+  border-radius: 0.35em;
   width: fit-content;
   gap: 2px;
   padding: 0px 4px;
