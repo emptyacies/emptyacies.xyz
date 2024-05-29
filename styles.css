@@ -178,7 +178,7 @@ a:hover {
 }
 
 .widget-header {
-  background: url("https://cdn.discordapp.com/banners/852841562651492372/c3257096dfbb4cd981ca9cdbae460f40.webp?size=512")
+  background: url("https://cdn.discordapp.com/banners/852841562651492372/c3257096dfbb4cd981ca9cdbae460f40.webp?size=1024&format=webp&width=0&height=256")
     no-repeat;
   background-size: cover;
   padding: 15px;
